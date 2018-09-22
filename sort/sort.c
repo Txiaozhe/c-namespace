@@ -50,6 +50,21 @@ void quick_sort(int *a, int left, int right) {
 	}
 }
 
+// 冒泡排序
+void bubble_sort(int *a, int length) {
+	int tmp;
+
+	for (int i = 0; i < length - 1; ++i) { // 第i轮排序
+		for (int j = 0; j < length - 1; ++j) {
+			if (a[j] > a[j + 1]) {
+				tmp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = tmp;
+			}
+		}
+	}
+}
+
 #define Max_Number 500000
 
 int main() {
@@ -64,10 +79,10 @@ int main() {
     start = clock();
 	// merge_sort(a,sizeof(a)/sizeof(int));    // 0.002s,可以看到，归并排序还是很快的
 	//heap_sort(a,sizeof(a)/sizeof(int));  // 有buggggggg
-	quick_sort(a, 0, sizeof(a) / sizeof(int) - 1); // 0.01s
+	// quick_sort(a, 0, sizeof(a) / sizeof(int) - 1); // 0.01s
 	// insert_sort(a, sizeof(a) / sizeof(int));
 	//select_sort(a,sizeof(a)/sizeof(int));   // 5.3s
-	//bubble_sort(a,sizeof(a)/sizeof(int));    // 12.5s
+	bubble_sort(a,sizeof(a)/sizeof(int));    // 12.5s
 	finish = clock();
 
 	printf("after sort:\n");
