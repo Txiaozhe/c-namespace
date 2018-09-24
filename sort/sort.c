@@ -106,6 +106,42 @@ void select_sort(int *a, int length)
 	}
 }
 
+// 归并排序
+// 利用经典二分法，分而治之
+// 合并二个有序数组，分配一个临时空间，装a，b的结果，最后将合并结果拷贝到数组a
+void merge_array(int *a, int size_a, int *b, int size_b) {
+	int *tmp = malloc((size_a + size_b) * sizeof(int));
+	int i, j, k;
+	i = j = k = 0;
+
+	while(i < size_a && j < size_b) {
+		tmp[k++] = (a[i] > b[j] ? b[j++] : a[i++]);
+	}
+
+	while(i < size_a) {
+		tmp[k++] = a[i++];
+	}
+
+	while(j < size_b) {
+		tmp[k++] = b[j++];
+	}
+
+	for (int p = 0; p < k; ++p) {
+		a[p] = tmp[p];
+	}
+
+	free(tmp);
+}
+
+void merge_sort(int *a, int length) {
+	if (length > 1) {
+		merge_sort(a, length / 2);
+		merge_sort(a + length / 2, length - length / 2);
+
+		merge_array(a, length / 2, a + length / 2, length - length / 2);
+	}
+}
+
 #define Max_Number 5000
 
 int main()
@@ -119,11 +155,11 @@ int main()
 	clock_t start, finish;
 
 	start = clock();
-	// merge_sort(a,sizeof(a)/sizeof(int));    // 0.002s,可以看到，归并排序还是很快的
+	merge_sort(a, sizeof(a) / sizeof(int));    // 0.002s,可以看到，归并排序还是很快的
 	//heap_sort(a,sizeof(a)/sizeof(int));  // 有buggggggg
 	// quick_sort(a, 0, sizeof(a) / sizeof(int) - 1); // 0.01s
 	// insert_sort(a, sizeof(a) / sizeof(int));
-	select_sort(a, sizeof(a) / sizeof(int));   // 5.3s
+	// select_sort(a, sizeof(a) / sizeof(int));   // 5.3s
 	// bubble_sort(a, sizeof(a) / sizeof(int)); // 12.5s
 	finish = clock();
 
