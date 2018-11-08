@@ -4,8 +4,6 @@ project(crow_demo)
 set(BOOST_ROOT $ENV{Boost_Dir})
 find_package(Boost 1.66.0 COMPONENTS log thread system regex date_time REQUIRED)
 
-include_directories($ENV{Boost_Dir} $ENV{Boost_Lib})
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_executable(crow_demo main.cpp crow_all.h)
