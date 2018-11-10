@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.6)
+project(handler_file_demo)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(PROJECT_BINARY_DIR "/Users/jimtang/GitHub/c-namespace/header_file/demo/build")
+add_executable(handler_file_demo main.cpp mymath.cpp mymath.h)
