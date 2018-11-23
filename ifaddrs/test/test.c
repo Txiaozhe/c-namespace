@@ -33,12 +33,14 @@ int main() {
       sin = (struct sockaddr_in*) ifa->ifa_netmask;
     }
 
-    if (ifa->ifa_dstaddr->sa_family == AF_INET6) {
-      printf("test-os: %s\n", "12-1");
-      sin6 = (struct sockaddr_in6*) ifa->ifa_dstaddr;
-    } else {
-      printf("test-os: %s\n", "12-2");
-      sin = (struct sockaddr_in*) ifa->ifa_dstaddr;
+    if (ifa->ifa_dstaddr) {
+      if (ifa->ifa_dstaddr->sa_family == AF_INET6) {
+        printf("test-os: %s\n", "12-1");
+        sin6 = (struct sockaddr_in6*) ifa->ifa_dstaddr;
+      } else {
+        printf("test-os: %s\n", "12-2");
+        sin = (struct sockaddr_in*) ifa->ifa_dstaddr;
+      }
     }
   }
   printf("success");
