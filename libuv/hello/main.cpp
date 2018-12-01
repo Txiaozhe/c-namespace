@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <node/uv.h>
+#include <uv.h>
 
 int main()
 {
