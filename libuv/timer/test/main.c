@@ -9,7 +9,7 @@ void callback(uv_timer_t* handler) {
     uv_timer_stop(handler);
     uv_close((uv_handle_t*)handler, NULL);
   }
-  printf("timer...");
+  printf("timer...\n");
 }
 
 int main() {
@@ -18,7 +18,7 @@ int main() {
 
   int err = uv_timer_init(loop, &timer);
 
-  uv_timer_start(&timer, callback, 1000, 1);
+  uv_timer_start(&timer, callback, 1000, 0); // repeat 为重复执行的间隔时间，为0时不重复
 
   return uv_run(loop, UV_RUN_DEFAULT);
 }
