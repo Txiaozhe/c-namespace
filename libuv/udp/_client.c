@@ -57,12 +57,14 @@ int main(void)
     r = uv_udp_bind(&client, (const struct sockaddr*) &addr, 0);
     buf = uv_buf_init("PING", 4);
     printf("sending message to server:%s.\n", buf.base);
-    uv_udp_send(&req,
+    uv_udp_send(
+        &req,
         &client,
         &buf,
         1,
         (const struct sockaddr*) &addr,
-        cl_send_cb);
+        cl_send_cb
+    );
 
     uv_run(loop, UV_RUN_DEFAULT);
 

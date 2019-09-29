@@ -55,12 +55,13 @@ int main()
 {
   loop = uv_default_loop();
 
-  uv_udp_init(loop, &server);
   uv_ip4_addr("0.0.0.0", 7001, &addr_info);
+  uv_udp_init(loop, &server);
   uv_udp_bind(&server, (const struct sockaddr*) &addr_info, 0);
   int ok = uv_udp_recv_start(&server, alloc_cb, recv_cb);
   printf("listening at: %d, status: %d\n", 7001, ok);
 
   uv_run(loop, UV_RUN_DEFAULT);
+
   return 0;
 }
